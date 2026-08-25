@@ -6,16 +6,22 @@ import { generateIngredients, generateConcepts } from './aiService.js'
 import { searchLocalStore, groupIngredientsByCategory } from './serpApiService.js'
 import { matchIngredient } from './ingredientPriceService.js'
 import {
-  SESSION_COOKIE,
   authConfigured,
   clearSessionCookieHeader,
   createSessionToken,
-  readCookie,
-  readSessionToken,
+  currentUser,
+  loginWithPassword,
+  registerWithPassword,
   sessionCookieHeader,
-  verifyGoogleIdToken,
 } from './authService.js'
-import { upsertUser, userStoreConfigured } from './userStore.js'
+import {
+  createProject,
+  deleteProject,
+  getProject,
+  listProjects,
+  projectStoreConfigured,
+  updateProject,
+} from './projectStore.js'
 
 // Vercel runs this as a Function, where there is no --dev flag and no long-lived
 // process. Local development passes --dev; anything else is treated as deployed.
@@ -30,50 +36,114 @@ app.use(express.json({ limit: '32kb' }))
 // as a Function, and killing the process would take every unrelated route down with
 // it. Sign-in simply stays off until it is configured — see /api/auth/config.
 export const configWarnings = [
-  authConfigured() ? null : 'GOOGLE_CLIENT_ID / SESSION_SECRET belum diisi — masuk dengan Google mati.',
-  userStoreConfigured() ? null : 'SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY belum diisi — pengguna tidak akan tersimpan.',
+  authConfigured() ? null : 'SUPABASE_URL / SUPABASE_ANON_KEY / SESSION_SECRET belum diisi — daftar dan masuk mati.',
+  projectStoreConfigured() ? null : 'SUPABASE_SERVICE_ROLE_KEY belum diisi — projek tidak bisa disimpan.',
 ].filter(Boolean)
 // Cookies are only marked Secure over HTTPS; in dev the app is served over plain
 // http://localhost, where a Secure cookie would simply be dropped.
 const secureCookies = !isDev
 
-/**
- * The Google client ID is a public identifier — it is meant to appear in the page.
- * It is still served from here rather than baked in at build time so that every
- * credential in this app follows one rule: the frontend asks the server for what
- * it needs, and .env is the only place any of them are written.
- */
-app.get('/api/auth/config', (_request, response) => {
+app.get('/api/auth/session', (request, response) => {
   response.json({
-    enabled: authConfigured(),
-    googleClientId: process.env.GOOGLE_CLIENT_ID || null,
+    user: currentUser(request),
+    authEnabled: authConfigured(),
+    canSave: projectStoreConfigured(),
   })
 })
 
-app.get('/api/auth/session', (request, response) => {
-  const session = readSessionToken(readCookie(request, SESSION_COOKIE))
-  response.json({ user: session, authEnabled: authConfigured() })
+// Register and log in are the same shape: hand the credentials to Supabase, and on
+// success replace them with our own signed httpOnly cookie. Supabase's own tokens
+// are never sent to the browser — the frontend has no Supabase credentials at all.
+const startSession = (response, user) => {
+  response.setHeader('Set-Cookie', sessionCookieHeader(createSessionToken(user), { secure: secureCookies }))
+  return response.json({ user: { id: user.id, email: user.email } })
+}
+
+app.post('/api/auth/register', async (request, response) => {
+  try {
+    const user = await registerWithPassword(request.body?.email, request.body?.password)
+    return startSession(response, user)
+  } catch (error) {
+    return response.status(error.status || 500).json({ error: error.message })
+  }
 })
 
-app.post('/api/auth/google', async (request, response) => {
-  if (!authConfigured()) {
-    return response.status(503).json({ error: 'Masuk dengan Google belum dikonfigurasi di server ini.' })
-  }
+app.post('/api/auth/login', async (request, response) => {
   try {
-    const user = await verifyGoogleIdToken(request.body?.credential)
-    await upsertUser(user)
-    response.setHeader('Set-Cookie', sessionCookieHeader(createSessionToken(user), { secure: secureCookies }))
-    return response.json({ user })
+    const user = await loginWithPassword(request.body?.email, request.body?.password)
+    return startSession(response, user)
   } catch (error) {
-    // 401 for a token we refused, 500 for our own failure to store the user.
-    const rejected = /token|terverifikasi|identitas|aplikasi lain|Penerbit/i.test(error.message)
-    return response.status(rejected ? 401 : 500).json({ error: error.message })
+    return response.status(error.status || 500).json({ error: error.message })
   }
 })
 
 app.post('/api/auth/logout', (_request, response) => {
   response.setHeader('Set-Cookie', clearSessionCookieHeader({ secure: secureCookies }))
   response.json({ ok: true })
+})
+
+/**
+ * Saved plans. requireUser is the only place a user id enters a query — taking it
+ * from the session rather than the request body is what stops one account reading
+ * another's plans, because the service_role key ignores row level security.
+ */
+const requireUser = (request, response) => {
+  const user = currentUser(request)
+  if (!user) {
+    response.status(401).json({ error: 'Masuk dulu untuk menyimpan atau membuka projek.' })
+    return null
+  }
+  return user
+}
+
+const projectFailed = (response, error) =>
+  response.status(error.status || 500).json({ error: error.message })
+
+app.get('/api/projects', async (request, response) => {
+  const user = requireUser(request, response)
+  if (!user) return undefined
+  try {
+    return response.json({ projects: await listProjects(user.id) })
+  } catch (error) { return projectFailed(response, error) }
+})
+
+app.post('/api/projects', async (request, response) => {
+  const user = requireUser(request, response)
+  if (!user) return undefined
+  try {
+    const project = await createProject(user.id, { name: request.body?.name, data: request.body?.data })
+    return response.status(201).json({ project })
+  } catch (error) { return projectFailed(response, error) }
+})
+
+app.get('/api/projects/:id', async (request, response) => {
+  const user = requireUser(request, response)
+  if (!user) return undefined
+  try {
+    const project = await getProject(user.id, request.params.id)
+    if (!project) return response.status(404).json({ error: 'Projek tidak ditemukan.' })
+    return response.json({ project })
+  } catch (error) { return projectFailed(response, error) }
+})
+
+app.put('/api/projects/:id', async (request, response) => {
+  const user = requireUser(request, response)
+  if (!user) return undefined
+  try {
+    const project = await updateProject(user.id, request.params.id, { name: request.body?.name, data: request.body?.data })
+    if (!project) return response.status(404).json({ error: 'Projek tidak ditemukan.' })
+    return response.json({ project })
+  } catch (error) { return projectFailed(response, error) }
+})
+
+app.delete('/api/projects/:id', async (request, response) => {
+  const user = requireUser(request, response)
+  if (!user) return undefined
+  try {
+    const removed = await deleteProject(user.id, request.params.id)
+    if (!removed) return response.status(404).json({ error: 'Projek tidak ditemukan.' })
+    return response.json({ ok: true })
+  } catch (error) { return projectFailed(response, error) }
 })
 
 app.get('/api/health', (_request, response) => {

@@ -1,46 +1,64 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
+import { authRequest } from './supabase.js'
 
 export const SESSION_COOKIE = 'mu_session'
-const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 30
 
-/**
- * Google's own tokeninfo endpoint checks the signature and the expiry for us. That
- * costs one request per sign-in — which happens rarely — and saves pulling a JWKS
- * library into a project that has deliberately stayed thin on dependencies.
- */
-export async function verifyGoogleIdToken(idToken) {
-  const clientId = process.env.GOOGLE_CLIENT_ID
-  if (!clientId) throw new Error('GOOGLE_CLIENT_ID belum diatur di .env')
-  if (typeof idToken !== 'string' || idToken.length < 20) throw new Error('Token masuk tidak valid.')
+export { authConfigured } from './supabase.js'
 
-  let payload
-  try {
-    const response = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`)
-    if (!response.ok) throw new Error('rejected')
-    payload = await response.json()
-  } catch {
-    // A network failure and a forged token are not the same thing, but from here
-    // both mean the same: we could not establish who this is, so nobody gets in.
-    throw new Error('Google tidak dapat memverifikasi token ini. Coba masuk lagi.')
+const MIN_PASSWORD = 8
+
+function validateCredentials(email, password) {
+  const cleanEmail = typeof email === 'string' ? email.trim().toLowerCase() : ''
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+    throw Object.assign(new Error('Alamat email tidak valid.'), { status: 400 })
   }
-
-  // tokeninfo validates the token itself but has no idea which app asked. Without
-  // this check, a token minted for ANY other Google app would be accepted here.
-  if (payload.aud !== clientId) throw new Error('Token ini diterbitkan untuk aplikasi lain.')
-  const issuer = String(payload.iss || '')
-  if (issuer !== 'accounts.google.com' && issuer !== 'https://accounts.google.com') {
-    throw new Error('Penerbit token tidak dikenali.')
+  if (typeof password !== 'string' || password.length < MIN_PASSWORD) {
+    throw Object.assign(new Error(`Kata sandi minimal ${MIN_PASSWORD} karakter.`), { status: 400 })
   }
-  // tokeninfo returns these as strings, not booleans.
-  if (String(payload.email_verified) !== 'true') throw new Error('Email Google ini belum terverifikasi.')
-  if (!payload.sub || !payload.email) throw new Error('Google tidak mengirim identitas yang lengkap.')
+  return { email: cleanEmail, password }
+}
 
-  return {
-    googleSub: String(payload.sub),
-    email: String(payload.email),
-    name: payload.name ? String(payload.name) : String(payload.email).split('@')[0],
-    picture: payload.picture ? String(payload.picture) : null,
+/** Supabase returns the account under different keys for signup vs token. */
+function userFrom(payload) {
+  const user = payload?.user || payload
+  if (!user?.id || !user?.email) {
+    throw Object.assign(new Error('Supabase tidak mengembalikan identitas yang lengkap.'), { status: 502 })
   }
+  return { id: String(user.id), email: String(user.email) }
+}
+
+export async function registerWithPassword(email, password) {
+  const clean = validateCredentials(email, password)
+  const payload = await authRequest('/signup', clean).catch((error) => {
+    // Supabase says "User already registered"; say something a person can act on.
+    if (/already registered|already exists/i.test(error.message)) {
+      throw Object.assign(new Error('Email ini sudah terdaftar. Coba masuk saja.'), { status: 409 })
+    }
+    throw error
+  })
+
+  // With "Confirm email" switched off, signup returns a usable session. If it is
+  // ever switched back on, there is no session here and the account cannot be used
+  // until the link is clicked — say so rather than pretending the sign-in worked.
+  if (!payload?.access_token && !payload?.user?.id) {
+    throw Object.assign(new Error('Akun dibuat, tapi perlu konfirmasi email sebelum bisa dipakai.'), { status: 202 })
+  }
+  return userFrom(payload)
+}
+
+export async function loginWithPassword(email, password) {
+  const clean = validateCredentials(email, password)
+  const payload = await authRequest('/token?grant_type=password', clean).catch((error) => {
+    if (/invalid login credentials/i.test(error.message)) {
+      throw Object.assign(new Error('Email atau kata sandi salah.'), { status: 401 })
+    }
+    if (/email not confirmed/i.test(error.message)) {
+      throw Object.assign(new Error('Email ini belum dikonfirmasi.'), { status: 403 })
+    }
+    throw error
+  })
+  return userFrom(payload)
 }
 
 function sessionSecret() {
@@ -55,10 +73,8 @@ const sign = (body) => createHmac('sha256', sessionSecret()).update(body).digest
 
 export function createSessionToken(user) {
   const body = Buffer.from(JSON.stringify({
-    sub: user.googleSub,
+    sub: user.id,
     email: user.email,
-    name: user.name,
-    picture: user.picture,
     exp: Math.floor(Date.now() / 1000) + SESSION_MAX_AGE_SECONDS,
   })).toString('base64url')
   return `${body}.${sign(body)}`
@@ -80,7 +96,7 @@ export function readSessionToken(token) {
     const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'))
     if (!payload?.sub || !payload?.exp) return null
     if (payload.exp <= Math.floor(Date.now() / 1000)) return null
-    return { googleSub: payload.sub, email: payload.email, name: payload.name, picture: payload.picture }
+    return { id: payload.sub, email: payload.email }
   } catch {
     return null
   }
@@ -122,4 +138,7 @@ export function clearSessionCookieHeader({ secure }) {
   return parts.join('; ')
 }
 
-export const authConfigured = () => Boolean(process.env.GOOGLE_CLIENT_ID && process.env.SESSION_SECRET)
+/** Reads the session off a request, or null. Used to scope every project query. */
+export function currentUser(request) {
+  return readSessionToken(readCookie(request, SESSION_COOKIE))
+}

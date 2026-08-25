@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Landing from './Landing.jsx'
-import SignIn from './SignIn.jsx'
+import { AuthDialog, ProjectsDialog, SaveDialog } from './Account.jsx'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import {
@@ -23,7 +23,9 @@ import {
   Globe2,
   Info,
   Lightbulb,
+  FolderOpen,
   LocateFixed,
+  LogIn,
   LogOut,
   Mail,
   Map as MapIcon,
@@ -182,7 +184,7 @@ function useStepReveal(step) {
   }, [step])
 }
 
-function Shell({ step, maxStep, setStep, user, onLogout, children }) {
+function Shell({ step, maxStep, setStep, user, canSave, onLogout, onLogin, onSave, onProjects, children }) {
   useStepReveal(step)
   return (
     <div className="app-shell">
@@ -190,6 +192,13 @@ function Shell({ step, maxStep, setStep, user, onLogout, children }) {
         <Logo />
         <nav>
           <button className="ghost-button" onClick={() => setStep(0)}>Mulai baru</button>
+          {/* Saving only makes sense once there is an analysed idea to save. */}
+          {canSave && step > 0 && (
+            <button className="topbar-action" onClick={onSave}><FolderOpen size={14} /> Simpan projek</button>
+          )}
+          {user
+            ? <button className="ghost-button" onClick={onProjects}>Projek saya</button>
+            : canSave && <button className="topbar-action" onClick={onLogin}><LogIn size={14} /> Masuk</button>}
           {user && (
             <div className="account-chip">
               {user.picture
@@ -1659,51 +1668,44 @@ function ResetWarningDialog({ onConfirm, onCancel }) {
 
 export default function App() {
   const [hasStarted, setHasStarted] = useState(false)
-  // 'checking' until the server answers. The landing page renders either way, so
-  // there is nothing to hold back — this only decides what "Coba gratis" does.
-  const [auth, setAuth] = useState({ status: 'checking', enabled: false, user: null, clientId: null })
-  const [showSignIn, setShowSignIn] = useState(false)
+// The four steps are open to everyone; an account is only needed to keep the work.
+  // 'canSave' is the server telling us whether saving is configured at all — with no
+  // Supabase credentials the buttons stay hidden rather than failing when pressed.
+  const [auth, setAuth] = useState({ status: 'checking', enabled: false, canSave: false, user: null })
+  const [dialog, setDialog] = useState(null)
+  const [openProjectId, setOpenProjectId] = useState(null)
+  const [openProjectName, setOpenProjectName] = useState('')
 
   useEffect(() => {
     let cancelled = false
-    Promise.all([
-      fetch('/api/auth/session', { credentials: 'same-origin' }).then((r) => r.json()),
-      fetch('/api/auth/config').then((r) => r.json()),
-    ])
-      .then(([session, config]) => {
+    fetch('/api/auth/session', { credentials: 'same-origin' })
+      .then((response) => response.json())
+      .then((session) => {
         if (cancelled) return
         setAuth({
           status: 'ready',
           enabled: Boolean(session.authEnabled),
+          canSave: Boolean(session.authEnabled && session.canSave),
           user: session.user || null,
-          clientId: config.googleClientId || null,
         })
       })
-      // If the check itself fails we cannot claim the user is signed out, but we
-      // also cannot let that lock them out of a dev server with no auth set up.
-      .catch(() => { if (!cancelled) setAuth({ status: 'ready', enabled: false, user: null, clientId: null }) })
+      // A failed check must not block the four steps — they never needed an account.
+      .catch(() => { if (!cancelled) setAuth({ status: 'ready', enabled: false, canSave: false, user: null }) })
     return () => { cancelled = true }
   }, [])
 
   const logout = useCallback(async () => {
     await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' }).catch(() => {})
     setAuth((prev) => ({ ...prev, user: null }))
-    setHasStarted(false)
-    setShowSignIn(false)
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    setOpenProjectId(null)
+    setOpenProjectName('')
+    setDialog(null)
   }, [])
 
   const enterApp = useCallback(() => {
-    // Sign-in is only demanded once the server says it is configured, so a dev
-    // machine without Google credentials is not locked out of its own app.
-    if (auth.enabled && !auth.user) {
-      setShowSignIn(true)
-      window.scrollTo({ top: 0, behavior: 'instant' })
-      return
-    }
     setHasStarted(true)
     window.scrollTo({ top: 0, behavior: 'instant' })
-  }, [auth.enabled, auth.user])
+  }, [])
   const [step, setStep] = useState(0)
   const [maxStep, setMaxStep] = useState(0)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -1791,6 +1793,56 @@ export default function App() {
     }))
   }
 
+  // What a saved plan actually is: the whole four-step state, so reopening one puts
+  // the user back exactly where they left off rather than at a blank first step.
+  const buildSnapshot = () => ({
+    version: 1,
+    form,
+    marketData,
+    aiConcepts,
+    selectedConcept,
+    batch,
+    hasEquipment,
+    step,
+    maxStep,
+  })
+
+  const restoreSnapshot = (project) => {
+    const data = project?.data || {}
+    if (data.form) setForm(data.form)
+    setMarketData(data.marketData ?? null)
+    setAiConcepts(data.aiConcepts ?? null)
+    setSelectedConcept(data.selectedConcept ?? null)
+    if (typeof data.batch === 'number') setBatch(data.batch)
+    if (typeof data.hasEquipment === 'boolean') setHasEquipment(data.hasEquipment)
+    setMaxStep(typeof data.maxStep === 'number' ? data.maxStep : 0)
+    setStep(typeof data.step === 'number' ? data.step : 0)
+    setOpenProjectId(project.id)
+    setOpenProjectName(project.name || '')
+    setHasStarted(true)
+    setDialog(null)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
+  const saveProject = async (name) => {
+    const body = { name, data: buildSnapshot() }
+    // Reopened projects update in place; a fresh one is created the first time.
+    const url = openProjectId ? `/api/projects/${openProjectId}` : '/api/projects'
+    const response = await fetch(url, {
+      method: openProjectId ? 'PUT' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify(body),
+    })
+    const result = await response.json().catch(() => ({}))
+    if (!response.ok) throw new Error(result.error || 'Gagal menyimpan projek.')
+    setOpenProjectId(result.project?.id || openProjectId)
+    setOpenProjectName(name)
+  }
+
+  // Pressing Save while signed out shows the sign-in form first, then comes back.
+  const requestSave = () => setDialog(auth.user ? 'save' : 'auth-then-save')
+
   const go = (next) => {
     // Moving forward onto results built from a product/location the user has since
     // edited would show them a plan for a different business — warn first.
@@ -1806,32 +1858,55 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
-  if (showSignIn) {
-    return (
-      <SignIn
-        googleClientId={auth.clientId}
-        onSignedIn={(user) => {
-          setAuth((prev) => ({ ...prev, user }))
-          setShowSignIn(false)
-          setHasStarted(true)
-          window.scrollTo({ top: 0, behavior: 'instant' })
-        }}
-        onBack={() => setShowSignIn(false)}
-      />
-    )
-  }
+  const dialogs = (
+    <>
+      {(dialog === 'auth' || dialog === 'auth-then-save') && (
+        <AuthDialog
+          onClose={() => setDialog(null)}
+          onSignedIn={(user) => {
+            setAuth((prev) => ({ ...prev, user }))
+            setDialog(dialog === 'auth-then-save' ? 'save' : null)
+          }}
+        />
+      )}
+      {dialog === 'save' && (
+        <SaveDialog
+          defaultName={openProjectName || form.product || ''}
+          onClose={() => setDialog(null)}
+          onSave={saveProject}
+        />
+      )}
+      {dialog === 'projects' && (
+        <ProjectsDialog onClose={() => setDialog(null)} onOpen={restoreSnapshot} />
+      )}
+    </>
+  )
 
   if (!hasStarted) {
-    return <Landing onStart={enterApp} />
+    return <>
+      <Landing onStart={enterApp} />
+      {dialogs}
+    </>
   }
 
   return (
-    <Shell step={step} maxStep={maxStep} setStep={go} user={auth.user} onLogout={logout}>
+    <Shell
+      step={step}
+      maxStep={maxStep}
+      setStep={go}
+      user={auth.user}
+      canSave={auth.canSave}
+      onLogout={logout}
+      onLogin={() => setDialog('auth')}
+      onSave={requestSave}
+      onProjects={() => setDialog('projects')}
+    >
       {step === 0 && <Intro form={form} setForm={setForm} onAnalyze={analyze} isAnalyzing={isAnalyzing} error={analysisError} />}
       {step === 1 && <MarketAnalysis form={form} data={marketData} onBack={() => go(0)} onNext={() => go(2)} />}
       {step === 2 && <ConceptChoice form={form} selected={selectedConcept} setSelected={setSelectedConcept} onBack={() => go(1)} onNext={() => go(3)} aiConcepts={aiConcepts} setAiConcepts={setAiConcepts} />}
       {step === 3 && <Plan form={form} conceptId={selectedConcept} aiConcepts={aiConcepts} marketData={marketData} batch={batch} setBatch={setBatch} hasEquipment={hasEquipment} setHasEquipment={setHasEquipment} onBack={() => go(2)} />}
       {resetPending && <ResetWarningDialog onConfirm={runAnalysis} onCancel={cancelReset} />}
+      {dialogs}
     </Shell>
   )
 }

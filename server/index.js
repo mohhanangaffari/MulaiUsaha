@@ -3,8 +3,7 @@ import express from 'express'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 import app, { configWarnings, isDev } from './app.js'
-import { authConfigured } from './authService.js'
-import { userStoreConfigured } from './userStore.js'
+import { authConfigured, projectStoreConfigured } from './supabase.js'
 
 // Local entry point only. On Vercel the app is served by api/index.js as a Function,
 // which never runs this file — there is no process to listen with there.
@@ -34,6 +33,6 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`MulaiUsaha running at http://localhost:${port}`)
   console.log(`Competitor provider: ${process.env.GOOGLE_MAPS_API_KEY ? 'Google Places' : 'Google Places setup required'}`)
   console.log(`Review fallback: ${process.env.SERPAPI_API_KEY ? 'SerpApi' : 'not configured'}`)
-  console.log(`Google sign-in: ${authConfigured() ? 'active' : 'not configured — app is open in dev'}`)
-  console.log(`User store: ${userStoreConfigured() ? 'Supabase' : 'not configured'}`)
+  console.log(`Auth Supabase: ${authConfigured() ? 'aktif' : 'belum dikonfigurasi — aplikasi terbuka tanpa login'}`)
+  console.log(`Simpan projek: ${projectStoreConfigured() ? 'aktif' : 'belum dikonfigurasi'}`)
 })

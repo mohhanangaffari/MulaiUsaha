@@ -22,6 +22,7 @@ import {
   projectStoreConfigured,
   updateProject,
 } from './projectStore.js'
+import { limiter } from './rateLimit.js'
 
 // Vercel runs this as a Function, where there is no --dev flag and no long-lived
 // process. Local development passes --dev; anything else is treated as deployed.
@@ -59,7 +60,25 @@ const startSession = (response, user) => {
   return response.json({ user: { id: user.id, email: user.email } })
 }
 
-app.post('/api/auth/register', async (request, response) => {
+// Nothing else stands between a script and an unlimited number of accounts: with
+// email confirmation off no mail is sent, so Supabase's own email rate limit never
+// applies. Five an hour is far above what a real person needs and far below what
+// makes bulk signup worthwhile.
+const registerLimit = limiter('register', {
+  limit: 5,
+  windowMs: 60 * 60 * 1000,
+  message: 'Terlalu banyak pendaftaran dari koneksi ini.',
+})
+
+// Looser, and aimed at a different problem: guessing passwords rather than making
+// accounts. A real person who forgot their password does not need 20 tries.
+const loginLimit = limiter('login', {
+  limit: 20,
+  windowMs: 15 * 60 * 1000,
+  message: 'Terlalu banyak percobaan masuk dari koneksi ini.',
+})
+
+app.post('/api/auth/register', registerLimit, async (request, response) => {
   try {
     const user = await registerWithPassword(request.body?.email, request.body?.password)
     return startSession(response, user)
@@ -68,7 +87,7 @@ app.post('/api/auth/register', async (request, response) => {
   }
 })
 
-app.post('/api/auth/login', async (request, response) => {
+app.post('/api/auth/login', loginLimit, async (request, response) => {
   try {
     const user = await loginWithPassword(request.body?.email, request.body?.password)
     return startSession(response, user)

@@ -1755,6 +1755,11 @@ export default function App() {
       setSelectedConcept(null)
       setBatch(20)
       setHasEquipment(true)
+      // A fresh analysis is a different plan from whatever was open before, even if
+      // its name gets reused — saving it must create a new row, not overwrite the
+      // last one just because its id was still sitting in state.
+      setOpenProjectId(null)
+      setOpenProjectName('')
       setIsAnalyzing(false)
       setStep(1)
       setMaxStep(1)

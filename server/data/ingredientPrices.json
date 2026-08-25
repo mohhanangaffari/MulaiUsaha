@@ -1,0 +1,874 @@
+{
+  "_petunjuk": "Isi kolom judul, harga, link, dan dicekTanggal untuk tiap bahan. Link boleh Tokopedia atau Shopee. Biarkan harga null kalau belum dicek — bahan itu akan pakai estimasi AI.",
+  "diperbaruiTanggal": "",
+  "items": [
+    {
+      "id": "tepung-terigu-protein-tinggi",
+      "nama": "Tepung terigu protein tinggi",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "cakra kembar",
+        "terigu cakra",
+        "tepung protein tinggi",
+        "tepung terigu cakra"
+      ],
+      "kemasan": "5 kg",
+      "satuan": "kg",
+      "isi": 5,
+      "judul": "Tepung Terigu Cakra Kembar Emas Roti Oriental 5Kg Tepung untuk Soft Bread",
+      "harga": 69000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/bluebell-mart/tepung-terigu-cakra-kembar-emas-roti-oriental-5kg-tepung-untuk-soft-bread-1732111162357483089?extParam=ivf%3Dfalse%26keyword%3Dtepung+terigu+cakra%26search_id%3D2026082404042840008B9A5380FC3C5MJO%26src%3Dsearch"
+    },
+    {
+      "id": "tepung-terigu-serbaguna",
+      "nama": "Tepung terigu serbaguna",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "segitiga biru",
+        "terigu segitiga",
+        "tepung terigu",
+        "tepung serbaguna",
+        "tepung protein sedang"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "SEGITIGA BIRU Tepung Terigu 500gr",
+      "harga": 9250,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tokoputraperdana/segitiga-biru-tepung-terigu-500gr-1729706220932205541?extParam=ivf%3Dfalse%26keyword%3Dtepung+terigu+serbaguna%26search_id%3D20260824040843FE73F687E5BC5211BV24%26src%3Dsearch&t_id=1787544296435&t_st=4&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "tepung-beras",
+      "nama": "Tepung beras",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "tepung beras rose brand"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "Tepung Beras Rosebrand 500gr",
+      "harga": 12800,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/sipbaking-murah-online/tepung-beras-rosebrand-500gr-1729645363230378722?extParam=ivf%3Dfalse%26keyword%3Dtepung+beras+rose+brand%26search_id%3D20260824041019226B5767496D0A2E7JBD%26src%3Dsearch&t_id=1787544296435&t_st=5&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "tepung-tapioka",
+      "nama": "Tepung tapioka",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "tepung kanji",
+        "tepung sagu",
+        "tapioka",
+        "aci"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "Tepung Tapioka Kanji Rose brand Rosebrand 500gr",
+      "harga": 9000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tobakingmurahonline/tepung-tapioka-kanji-rose-brand-rosebrand-500gr?extParam=ivf%3Dfalse%26keyword%3Dtepung+tapioka%26search_id%3D20260824041200DCE632459E4D410D6AJN%26src%3Dsearch&t_id=1787544296435&t_st=6&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "tepung-maizena",
+      "nama": "Tepung maizena",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "maizena",
+        "tepung jagung"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "MAIZENAKU 1KG TEPUNG JAGUNG Bahan Masakan Tepung Maizena Egafood",
+      "harga": 30900,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/nonamegoods/maizenaku-1kg-tepung-jagung-bahan-masakan-tepung-maizena-egafood-1729857293685459086?extParam=ivf%3Dfalse%26keyword%3Dtepung+jagung%26search_id%3D20260824041438AD13A2A07CA4B72D6SGN%26src%3Dsearch&t_id=1787544296435&t_st=7&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "tepung-panir",
+      "nama": "Tepung panir",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "tepung roti",
+        "bread crumb",
+        "panir"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "TEPUNG ROTI SAKTI KEMASAN 1KG",
+      "harga": 24750,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/sakti-pangan-perkasa/tepung-roti-sakti-kemasan-1kg-1732369174847456886?extParam=ivf%3Dfalse%26keyword%3Dtepung+roti%26search_id%3D20260824041627CD00692C3BFE591A7IU0%26src%3Dsearch&t_id=1787544296435&t_st=8&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "beras",
+      "nama": "Beras",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "beras putih",
+        "beras medium"
+      ],
+      "kemasan": "5 kg",
+      "satuan": "kg",
+      "isi": 5,
+      "judul": "beras premium sania 5 kg, Beras Sania adalah beras premium hasil teknologi Jepang, dikenal menghasilkan nasi pulen dan enak Rice",
+      "harga": 99000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/hfrozen-4/beras-sania-5-kg?extParam=ivf%3Dfalse%26keyword%3Dberas+5kg+sania%26search_id%3D20260824042037955AF57E494555389CCE%26src%3Dsearch&t_id=1787544296435&t_st=14&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "gula-pasir",
+      "nama": "Gula pasir",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "gula",
+        "gula putih",
+        "gula pasir kristal"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "GULA KUNING / GULA PUTIH ROSE BRAND 1 KG - GULA KUNING",
+      "harga": 25000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/cstar/gula-kuning-gula-putih-rose-brand-1-kg-1729567822259717659?extParam=ivf%3Dfalse%26keyword%3Dgula-pasir+1+kg%26search_id%3D20260824043251AD13A2A07CA4B70AETSS%26src%3Dsearch&t_id=1787544296435&t_st=15&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "gula-merah",
+      "nama": "Gula merah",
+      "kategori": "Tepung & bahan pokok",
+      "alias": [
+        "gula jawa",
+        "gula aren",
+        "gula kelapa"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "GULA MERAH AREN 100% ASLI BERAT 500GRAM",
+      "harga": 25500,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/threerasa/gula-merah-aren-100-asli-berat-500gram-1732025622942680458?extParam=ivf%3Dfalse%26keyword%3Dgula-merah+500+gram%26search_id%3D20260824043403FE73F687E5BC5200EAFP%26src%3Dsearch&t_id=1787544296435&t_st=16&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "minyak-goreng",
+      "nama": "Minyak goreng",
+      "kategori": "Minyak & lemak",
+      "alias": [
+        "minyak",
+        "bimoli",
+        "minyak sawit",
+        "minyak curah"
+      ],
+      "kemasan": "2 liter",
+      "satuan": "liter",
+      "isi": 2,
+      "judul": "Sunco Minyak Goreng 2 Liter Pouch",
+      "harga": 58500,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tobakingmurahonline/sunco-minyak-goreng-2-liter-pouch?extParam=ivf%3Dfalse%26keyword%3Dminyak+goreng+2+liter%26search_id%3D20260824043628C203D8A151612A2BA38X%26src%3Dsearch&t_id=1787544296435&t_st=17&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "margarin",
+      "nama": "Margarin",
+      "kategori": "Minyak & lemak",
+      "alias": [
+        "blue band",
+        "palmia",
+        "mentega margarin"
+      ],
+      "kemasan": "200 gram",
+      "satuan": "gram",
+      "isi": 200,
+      "judul": "Blue Band Margarin Serbaguna 200 gr",
+      "harga": 10800,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tobakingmurahonline/blue-band-margarin-serbaguna-200-gr?extParam=ivf%3Dfalse%26keyword%3Dmargarin+200+gram%26search_id%3D20260824043730C203D8A151612A237XYR%26src%3Dsearch&t_id=1787544296435&t_st=18&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "mentega",
+      "nama": "Mentega",
+      "kategori": "Minyak & lemak",
+      "alias": [
+        "butter",
+        "anchor",
+        "wijsman"
+      ],
+      "kemasan": "200 gram",
+      "satuan": "gram",
+      "isi": 200,
+      "judul": "Forvita Margarine Mentega Kemasan 200gr",
+      "harga": 10400,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tokoejc/forvita-margarine-mentega-kemasan-200gr-1729897985738247098?extParam=ivf%3Dfalse%26keyword%3Dmentega+200+gram%26search_id%3D20260824043843DCE632459E4D413B7T61%26src%3Dsearch&t_id=1787544296435&t_st=19&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "santan-instan",
+      "nama": "Santan instan",
+      "kategori": "Minyak & lemak",
+      "alias": [
+        "kara",
+        "santan kara",
+        "santan kemasan"
+      ],
+      "kemasan": "12 x 65 ml (780 ml)",
+      "satuan": "ml",
+      "isi": 780,
+      "judul": "12 PCS SUN KARA SANTAN 65ML",
+      "harga": 65700,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/reta-tria/12-pcs-sun-kara-santan-65ml-1729613946903300774?extParam=ivf%3Dfalse%26keyword%3Dsantan-instan+65+ml%26search_id%3D20260824043956C203D8A151612A17EU61%26src%3Dsearch&t_id=1787544296435&t_st=20&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "telur-ayam",
+      "nama": "Telur ayam",
+      "kategori": "Protein",
+      "alias": [
+        "telur",
+        "telur ayam negeri",
+        "telur ras"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "Haqin Egg, Telur Segar 1 kg (16-17 butir) cocok digunakan untuk kebutuhan memasak - telur ayam, telur ayam",
+      "harga": 34000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/haqin-egg/haqin-egg-telur-segar-1-kg-16-20-butir-cocok-digunakan-untuk-kebutuhan-memasak-1731162012973958208?extParam=ivf%3Dfalse%26keyword%3Dtelur-ayam+1+kg%26search_id%3D20260824044442C203D8A151612A1A2N3W%26src%3Dsearch&t_id=1787544296435&t_st=21&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "ayam-fillet",
+      "nama": "Ayam fillet dada",
+      "kategori": "Protein",
+      "alias": [
+        "dada ayam",
+        "fillet ayam",
+        "daging ayam",
+        "ayam potong"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "Fillet Dada Ayam Probiotik Organik Frozen (800-1000gr) Bebas Hormon Antibiotik Dan Residu Kimia - beli 1",
+      "harga": 80000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tukutukunatural/fillet-dada-ayam-probiotik-organik-frozen-800-1000gr-bebas-hormon-antibiotik-dan-residu-kimia-1729827372346082372?extParam=ivf%3Dfalse%26keyword%3Ddada+ayam-fillet+1+kg%26search_id%3D20260824044635FE73F687E5BC520B7K7H%26src%3Dsearch%26whid%3D20249583&t_id=1787544296435&t_st=23&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "daging-sapi-giling",
+      "nama": "Daging sapi giling",
+      "kategori": "Protein",
+      "alias": [
+        "daging giling",
+        "sapi giling",
+        "daging sapi"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "Hijrahfood Daging Giling Sapi | Minced Ground Beef REGULAR - 500 gram",
+      "harga": 15500,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/hijrahfood-meatshop-hub/hijrahfood-daging-giling-sapi-minced-ground-beef-regular-500-gram-1731365915051919117?extParam=ivf%3Dfalse%26keyword%3Ddaging-sapi-giling+500gram%26search_id%3D2026082404480640008B9A5380FC215IHF%26src%3Dsearch%26whid%3D11856292&t_id=1787544296435&t_st=24&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "udang",
+      "nama": "Udang",
+      "kategori": "Protein",
+      "alias": [
+        "udang segar",
+        "udang kupas"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "UDANG KUPAS / UDANG API KUPAS SEGAR 500gram grade food pakan ikan OK",
+      "harga": 40000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/jjfarmshop/udang-kupas-udang-api-kupas-segar-500gram-grade-food-pakan-ikan-ok?extParam=ivf%3Dfalse%26keyword%3Dudang+segar+kupas+500+gram%26search_id%3D2026082404495940008B9A5380FC2934LB%26src%3Dsearch&t_id=1787544296435&t_st=26&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "ikan-tenggiri-giling",
+      "nama": "Ikan tenggiri giling",
+      "kategori": "Protein",
+      "alias": [
+        "tenggiri",
+        "ikan tenggiri",
+        "daging ikan giling"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "Tenggiri Giling Murni Super Premium 500 gram 100% daging murni",
+      "harga": 55000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/ferryfish/tenggiri-giling-murni-super-premium-500-gram-100-daging-murni?extParam=ivf%3Dfalse%26keyword%3Dikan-tenggiri-giling+500+gram%26search_id%3D2026082404511540008B9A5380FC26BXFN%26src%3Dsearch&t_id=1787544296435&t_st=29&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "sosis-sapi",
+      "nama": "Sosis sapi",
+      "kategori": "Protein",
+      "alias": [
+        "sosis",
+        "kanzler",
+        "sosis ayam",
+        "sosis bratwurst"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "BARTOZ Sosis Cocktail Frankfurter 500 GR Sosis Tanpa Dikupas dengan Casing Warna Merah Sehat dan Halal Makanan Frozen Meat Daging Food",
+      "harga": 37000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/bartozofficial/bartoz-sosis-cocktail-frankfurter-500-gr-sosis-tanpa-dikupas-dengan-casing-warna-merah-sehat-dan-halal-makanan-frozen-meat-daging-food-seblak-1733897233820256012?extParam=ivf%3Dfalse%26keyword%3Dsosis-sapi+500+gram%26search_id%3D20260824045311AD13A2A07CA4B7322CZB%26src%3Dsearch&t_id=1787544296435&t_st=32&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "bakso-sapi",
+      "nama": "Bakso sapi",
+      "kategori": "Protein",
+      "alias": [
+        "bakso",
+        "pentol",
+        "bakso ikan"
+      ],
+      "kemasan": "700 Gram",
+      "satuan": "gram",
+      "isi": 700,
+      "judul": "Baso sapi warisan 319 (700 Gram) isi 50 pcs TERMURAH!!!",
+      "harga": 41175,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/cakrawalaindah/baso-sapi-warisan-319-isi-50-pcs-termurah?extParam=ivf%3Dfalse%26keyword%3Dbakso+sapi%26search_id%3D2026082404593940008B9A5380FC098XM1%26src%3Dsearch&t_id=1787544296435&t_st=35&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "tahu-putih",
+      "nama": "Tahu putih",
+      "kategori": "Kedelai & olahan",
+      "alias": [
+        "tahu",
+        "tahu cina",
+        "tahu kuning"
+      ],
+      "kemasan": "10 pcs",
+      "satuan": "pcs",
+      "isi": 10,
+      "judul": "TAHU PUTIH [10Pcs]",
+      "harga": 11000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tukangsayurjkt/tahu-putih-10pcs?extParam=ivf%3Dfalse%26keyword%3Dtahu-putih+10+pcs%26search_id%3D2026082406091840008B9A5380FC32DKVA%26src%3Dsearch&t_id=1787544296435&t_st=36&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "tempe",
+      "nama": "Tempe",
+      "kategori": "Kedelai & olahan",
+      "alias": [
+        "tempe kedelai"
+      ],
+      "kemasan": "1 papan",
+      "satuan": "papan",
+      "isi": 1,
+      "judul": "Tempe per 1 Papan",
+      "harga": 5000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/pasarcikurubuk/tempe-per-1-papan?extParam=ivf%3Dfalse%26keyword%3Dtempe+1+papan%26search_id%3D20260824061049816B112C6105B31E07QS%26src%3Dsearch&t_id=1787544296435&t_st=37&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "kulit-pangsit",
+      "nama": "Kulit pangsit",
+      "kategori": "Kedelai & olahan",
+      "alias": [
+        "kulit dimsum",
+        "kulit siomay",
+        "kulit lumpia",
+        "kulit wonton"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "Kulit Pangsit 500 gram / Somay / dimsum / Serbaguna dan Murah",
+      "harga": 10925,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/spatulaku/kulit-pangsit-500-gram-somay-dimsum-serbaguna-dan-murah?extParam=ivf%3Dfalse%26keyword%3Dkulit+pangsit+dimsum+500+gram%26search_id%3D2026082406122389F0FD5C927D460C02D1%26src%3Dsearch&t_id=1787544296435&t_st=39&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "susu-uht-full-cream",
+      "nama": "Susu UHT full cream",
+      "kategori": "Susu & keju",
+      "alias": [
+        "susu uht",
+        "susu cair",
+        "ultra milk",
+        "susu full cream"
+      ],
+      "kemasan": "1 liter",
+      "satuan": "liter",
+      "isi": 1,
+      "judul": "SUSU UHT DIAMOND Full Cream 1 L / TERMURAH!",
+      "harga": 21920,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/coffeesolutionindo/susu-uht-diamond-full-cream-1-l-termurah?extParam=ivf%3Dfalse%26keyword%3Dsusu-uht-full-cream+1+liter%26search_id%3D2026082406140840008B9A5380FC0FDE8T%26src%3Dsearch&t_id=1787544296435&t_st=43&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "susu-kental-manis",
+      "nama": "Susu kental manis",
+      "kategori": "Susu & keju",
+      "alias": [
+        "skm",
+        "frisian flag",
+        "kental manis",
+        "indomilk"
+      ],
+      "kemasan": "370 gram",
+      "satuan": "gram",
+      "isi": 370,
+      "judul": "FRISIAN FLAG SUSU BENDERA KALENG 370 G - PUTIH KALENG",
+      "harga": 16995,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/sb99/frisian-flag-susu-bendera-kaleng-370-g-1730321788693087685?extParam=ivf%3Dfalse%26keyword%3Dsusu-kental-manis+370+gram%26search_id%3D20260824061620DCE632459E4D41294RSZ%26src%3Dsearch&t_id=1787544296435&t_st=44&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "keju-cheddar",
+      "nama": "Keju cheddar",
+      "kategori": "Susu & keju",
+      "alias": [
+        "keju",
+        "cheddar",
+        "kraft",
+        "prochiz"
+      ],
+      "kemasan": "180 gram",
+      "satuan": "gram",
+      "isi": 180,
+      "judul": "KEJU PROCHIZ GOLD PCK 180 Gram Cheese",
+      "harga": 18300,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/multipanganjaya/keju-prochiz-gold-pck-180-gram?extParam=ivf%3Dfalse%26keyword%3Dkeju-cheddar+180+gram%26search_id%3D20260824061706816B112C6105B32A4ZPT%26src%3Dsearch&t_id=1787544296435&t_st=45&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "bawang-merah",
+      "nama": "Bawang merah",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "brambang"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "Bawang merah ukuran sedang 1kg",
+      "harga": 32500,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tm-group1/bawang-merah-ukuran-sedang-1kg-1731649600110625991?extParam=ivf%3Dfalse%26keyword%3Dbawang-merah+1+kg%26search_id%3D20260824061753FE73F687E5BC52017ZUF%26src%3Dsearch&t_id=1787544296435&t_st=46&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "bawang-putih",
+      "nama": "Bawang putih",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "garlic"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "Bawang Putih tunggal ukuran medium 1kg",
+      "harga": 95000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/dinayashop/bawang-putih-tunggal-ukuran-medium-1kg?extParam=ivf%3Dfalse%26keyword%3Dbawang-putih+1+kg%26search_id%3D2026082406184240008B9A5380FC287R6P%26src%3Dsearch&t_id=1787544296435&t_st=51&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "cabai-merah-keriting",
+      "nama": "Cabai merah keriting",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "cabe merah",
+        "cabai merah",
+        "lombok merah"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "CABE MERAH KERITING FRESH 1KG - KERITING 1KG",
+      "harga": 34999,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/mas-tani90/cabe-merah-keriting-fresh-1kg-1732380648947877095?extParam=ivf%3Dfalse%26keyword%3Dcabai-merah-keriting+1+kg%26search_id%3D20260824062327FE73F687E5BC5237C0HC%26src%3Dsearch&t_id=1787544296435&t_st=52&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "cabai-rawit",
+      "nama": "Cabai rawit",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "cabe rawit",
+        "rawit setan",
+        "cabai setan"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "1kg CABE RAWIT TEJA KERING /MEDIUM SUPER PEDAS Alami Merah Food bumbu Chili Cabai - Medium / campur",
+      "harga": 38900,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/toko-bismillah-3putri/cabe-rawit-teja-kering-premium-super-pedas-1kg-alami-merah-food-bumbu-cabai-1733565799538656621?extParam=ivf%3Dfalse%26keyword%3Dcabai-rawit+1+kg+%26search_id%3D20260824062437955AF57E49455509AQAC%26src%3Dsearch&t_id=1787544296435&t_st=53&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "garam",
+      "nama": "Garam",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "garam dapur",
+        "garam beryodium"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "REFINA GARAM MEJA PREMIUM 500g",
+      "harga": 10900,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/sb99/garam-refina-500gr?extParam=ivf%3Dfalse%26keyword%3Dgaram+500+gram%26search_id%3D20260824062531FE73F687E5BC5219CU6Q%26src%3Dsearch&t_id=1787544296435&t_st=56&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "merica-bubuk",
+      "nama": "Merica bubuk",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "lada bubuk",
+        "merica",
+        "lada"
+      ],
+      "kemasan": "100 gram",
+      "satuan": "gram",
+      "isi": 100,
+      "judul": "Ladaku merica bubuk murni 100gr lada bubuk mrica",
+      "harga": 48500,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/sipbaking-murah-online/ladaku-merica-bubuk-murni-100gr-lada-bubuk-mrica-1729736058831341282?extParam=ivf%3Dfalse%26keyword%3Dmerica-bubuk+100+gram%26search_id%3D202608240627317750C9BA8365FE0F3W26%26src%3Dsearch&t_id=1787544296435&t_st=58&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "penyedap-rasa",
+      "nama": "Penyedap rasa",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "royco",
+        "masako",
+        "kaldu bubuk",
+        "micin",
+        "totole"
+      ],
+      "kemasan": "230 gram",
+      "satuan": "gram",
+      "isi": 230,
+      "judul": "Royko sapi besar 230gr",
+      "harga": 10541,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tokonalisma/royko-sapi-besar-230gr?extParam=ivf%3Dfalse%26keyword%3Dpenyedap-rasa+230+gram%26search_id%3D20260824063326AD13A2A07CA4B711D8TT%26src%3Dsearch&t_id=1787544296435&t_st=59&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "kecap-manis",
+      "nama": "Kecap manis",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "kecap",
+        "bango",
+        "abc kecap"
+      ],
+      "kemasan": "600 ml",
+      "satuan": "ml",
+      "isi": 600,
+      "judul": "Kecap Manis Bango 600ml",
+      "harga": 26000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tokoberasjogja/kecap-manis-bango-600ml?extParam=ivf%3Dfalse%26keyword%3Dkecap+bango+600+ml%26search_id%3D2026082406350240008B9A5380FC0700VK%26src%3Dsearch&t_id=1787544296435&t_st=61&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "saus-sambal",
+      "nama": "Saus sambal",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "sambal botol",
+        "saos sambal",
+        "sambal abc"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "BC Sambal Asli 1 kg (Pillow 1 kg)",
+      "harga": 44633,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/abc-official/abc-sambal-asli-1-kg-pillow-1-kg-1729641324232672517?extParam=ivf%3Dfalse%26keyword%3Dsaus-sambal+abc+1+kg%26search_id%3D20260824063857C203D8A151612A2616WB%26src%3Dsearch&t_id=1787544296435&t_st=64&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "saus-tomat",
+      "nama": "Saus tomat",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "saos tomat",
+        "tomat botol"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "Saus Sambal Del Monte kemasan Pouch Refil 1kg Tomat / Extra Hot Halal Murah Grosir - Saus Tomat",
+      "harga": 24193,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/toserda/saus-sambal-delmonte-tomat-extra-hot-kemasan-botol-140ml-murah-grosi-saus-tomat?extParam=ivf%3Dfalse%26keyword%3Dsaus-tomat+1+kg%26search_id%3D20260824064008DCE632459E4D41357T8T%26src%3Dsearch&t_id=1787544296435&t_st=66&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "mayones",
+      "nama": "Mayones",
+      "kategori": "Bumbu & saus",
+      "alias": [
+        "mayonaise",
+        "mayo",
+        "maestro",
+        "mayonnaise"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "Mamayo Mayonaise 1 kg Mayones Original Mayonais 1000 gr",
+      "harga": 28800,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/tobakingmurahonline/mamayo-mayonaise-1-kg-mayones-original-mayonais-1000-gr?extParam=ivf%3Dfalse%26keyword%3Dmayones%26search_id%3D20260824064147AD13A2A07CA4B7062HXR%26src%3Dsearch&t_id=1787544296435&t_st=67&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "ragi-instan",
+      "nama": "Ragi instan",
+      "kategori": "Bahan kue",
+      "alias": [
+        "fermipan",
+        "yeast",
+        "ragi roti",
+        "saf instant"
+      ],
+      "kemasan": "11 gram",
+      "satuan": "gram",
+      "isi": 11,
+      "judul": "Fermipan / Ragi Instan 11gr - Fermipan / Ragi Instan 11gr",
+      "harga": 6800,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/sipbaking-murah-online/fermipan-ragi-instan-11gr-1729691705494375138?extParam=ivf%3Dfalse%26keyword%3Dragi-instan+11+gram%26search_id%3D20260824071013226B5767496D0A170ZR2%26src%3Dsearch&t_id=1787544296435&t_st=69&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "baking-powder",
+      "nama": "Baking powder",
+      "kategori": "Bahan kue",
+      "alias": [
+        "baking powder double acting"
+      ],
+      "kemasan": "45 gram",
+      "satuan": "gram",
+      "isi": 45,
+      "judul": "Koepoe Koepoe Baking Powder Double Acting 45g - Bahan Kue Berkualitas Tinggi untuk Hasil Kue Terbaik",
+      "harga": 9405,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/budi-plstik/koepoe-koepoe-baking-powder-double-acting-45g-bahan-kue-berkualitas-tinggi-untuk-hasil-kue-terbaik-1734930097402316593?extParam=ivf%3Dfalse%26keyword%3Dbaking+powder+double+acting+45+gram%26search_id%3D202608240711257750C9BA8365FE167KJK%26src%3Dsearch&t_id=1787544296435&t_st=72&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "soda-kue",
+      "nama": "Soda kue",
+      "kategori": "Bahan kue",
+      "alias": [
+        "baking soda",
+        "soda bikarbonat"
+      ],
+      "kemasan": "80 gram",
+      "satuan": "gram",
+      "isi": 80,
+      "judul": "Koepoe Koepoe Baking Powder Soda Kue Pengembang Kue Serbaguna untuk Bolu Kue Kering Cake Baking Mix Kue Makanan Food",
+      "harga": 15400,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/angelalee/koepoe-koepoe-baking-powder-soda-kue-pengembang-kue-baking-mix-1729663811476818351?extParam=ivf%3Dfalse%26keyword%3Dsoda+kue+80gr%26search_id%3D20260824071456DCE632459E4D4133CQ82%26src%3Dsearch&t_id=1787544296435&t_st=81&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "vanili-bubuk",
+      "nama": "Vanili bubuk",
+      "kategori": "Bahan kue",
+      "alias": [
+        "vanila",
+        "vanilla",
+        "essence vanili"
+      ],
+      "kemasan": "500 gram",
+      "satuan": "gram",
+      "isi": 500,
+      "judul": "Bubuk Vanili Cendrawasih Kemasan 500gr - Baking Food Bahan Vanila Manis Vanilla",
+      "harga": 23500,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/oryzastuff/bubuk-vanili-cendrawasih-kemasan-500gr-baking-food-bahan-vanila-manis-vanilla-1730691261046490709?extParam=ivf%3Dfalse%26keyword%3Dvanili+bubuk%26search_id%3D20260824071706FE73F687E5BC52104PGS%26src%3Dsearch&t_id=1787544296435&t_st=82&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "coklat-bubuk",
+      "nama": "Coklat bubuk",
+      "kategori": "Bahan kue",
+      "alias": [
+        "cocoa powder",
+        "bubuk coklat",
+        "van houten"
+      ],
+      "kemasan": "90 gram",
+      "satuan": "gram",
+      "isi": 90,
+      "judul": "COKLAT BUBUK VAN HOUTEN COCOA POWDER 90GR / GRAM - COKELAT BUBUK",
+      "harga": 35000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/anekabahankuebdg/coklat-bubuk-van-houten-cocoa-powder-90gr-gram-cokelat-bubuk?extParam=ivf%3Dfalse%26keyword%3Dcoklat+bubuk+90+gram%26search_id%3D20260824071810955AF57E4945552D3UMD%26src%3Dsearch&t_id=1787544296435&t_st=85&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "kol",
+      "nama": "Kol",
+      "kategori": "Sayur",
+      "alias": [
+        "kubis",
+        "kol putih"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "kol ukuran 1 kg dan 500 gram - 1 kg",
+      "harga": 14500,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/rayasupplier/kol-ukuran-1-kg-dan-500-gram-1731766427206386734?extParam=ivf%3Dfalse%26keyword%3Dkol+1kg%26search_id%3D20260824071901955AF57E49455529C5UY%26src%3Dsearch&t_id=1787544296435&t_st=86&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "wortel",
+      "nama": "Wortel",
+      "kategori": "Sayur",
+      "alias": [
+        "carrot"
+      ],
+      "kemasan": "1 kg",
+      "satuan": "kg",
+      "isi": 1,
+      "judul": "wortel import fresh termurah premium 500 gram 1 kg 2 kg - 1 kg",
+      "harga": 7500,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/rumah-sayur-buah-berkah/wortel-import-fresh-termurah-premium-500-gram-1-kg-2-kg-1731422490679674644?extParam=ivf%3Dfalse%26keyword%3Dwortel+1kg%26search_id%3D2026082407195589F0FD5C927D46170MOP%26src%3Dsearch&t_id=1787544296435&t_st=87&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "daun-bawang",
+      "nama": "Daun bawang",
+      "kategori": "Sayur",
+      "alias": [
+        "loncang",
+        "bawang daun",
+        "seledri daun bawang"
+      ],
+      "kemasan": "250 gram",
+      "satuan": "gram",
+      "isi": 250,
+      "judul": "Daun bawang 250 gram - 250gr",
+      "harga": 5750,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/sabuga-fresh/daun-bawang-250-gram-250gr?extParam=ivf%3Dfalse%26keyword%3Ddaun-bawang+250+gram%26search_id%3D20260824072035FE73F687E5BC5230FBI3%26src%3Dsearch&t_id=1787544296435&t_st=88&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "plastik-klip",
+      "nama": "Plastik klip",
+      "kategori": "Kemasan",
+      "alias": [
+        "plastik zip",
+        "plastik ziplock",
+        "plastik pe",
+        "plastik kemasan"
+      ],
+      "kemasan": "1 pack",
+      "satuan": "pack",
+      "isi": 1,
+      "judul": "Plastik Klip Ziplock Bening 1 Pack Isi 100 Pcs Ukuran 3X5 4X6 5X8 6X10 7X10 8X12 8.7X13 10X15 11X17 - KLIP BNG PACK 11X17",
+      "harga": 17999,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/suhuofficial/plastik-klip-ziplock-bening-1-pack-isi-100-pcs-ukuran-3x5-4x6-5x8-6x10-7x10-8x12-8-7x13-10x15-11x17-1731647368387069389?extParam=ivf%3Dfalse%26keyword%3Dplastik-klip+1+pack%26search_id%3D20260824072127FE73F687E5BC522197EA%26src%3Dsearch&t_id=1787544296435&t_st=89&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "kertas-nasi",
+      "nama": "Kertas nasi food grade",
+      "kategori": "Kemasan",
+      "alias": [
+        "kertas minyak",
+        "kertas bungkus",
+        "food paper",
+        "kertas nasi"
+      ],
+      "kemasan": "1 pack",
+      "satuan": "pack",
+      "isi": 1,
+      "judul": "KERTAS NASI BUNGKUS KULINER/OSAKA MERAH 27X37 UK ISI 100 LEMBAR BESAR",
+      "harga": 16000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/taman-plastik/kertas-nasi-osaka-merah-isi-100lembar?extParam=ivf%3Dfalse%26keyword%3Dkertas-nasi+1pack%26search_id%3D20260824072312226B5767496D0A359CGJ%26src%3Dsearch&t_id=1787544296435&t_st=90&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "mika-bening",
+      "nama": "Mika bening",
+      "kategori": "Kemasan",
+      "alias": [
+        "mika plastik",
+        "kotak mika",
+        "wadah mika"
+      ],
+      "kemasan": "1 pack",
+      "satuan": "pack",
+      "isi": 1,
+      "judul": "Mika Kue Basah Uk 3 4 5 6 7 & Mika Burger Bening Uk 3 4 5 6 7 Kemasan Jajanan Pasar Serba Guna Pack JSP - Mika Kue uk3 100pc",
+      "harga": 23779,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/triguna-jaya-sentosa-trifinity/mika-kue-basah-n-nasi-plastik-bening-uk-3-4-5-6-7-kemasan-jajanan-pasar-serba-guna-pack-jsp-1730809928875804577-1736271550444898209?extParam=ivf%3Dfalse%26keyword%3Dmika-bening+1+pack%26search_id%3D20260824072344C203D8A151612A041YBH%26src%3Dsearch&t_id=1787544296435&t_st=92&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "box-makanan",
+      "nama": "Box makanan kertas",
+      "kategori": "Kemasan",
+      "alias": [
+        "lunch box",
+        "box nasi",
+        "kotak makan kertas",
+        "paper lunch box"
+      ],
+      "kemasan": "1 pack",
+      "satuan": "pack",
+      "isi": 1,
+      "judul": "Lunch Box Kertas Kraft Coklat Eco-Friendly & Food Grade - M NORMAL - ISI 50",
+      "harga": 27400,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/kraftboss-paper/lunch-box-kertas-kraft-coklat-eco-friendly-food-grade-1730521762186626696-1730521997308954248?extParam=ivf%3Dfalse%26keyword%3Dbox+makanan+kertas+1+pack%26search_id%3D20260824072505816B112C6105B3144TVP%26src%3Dsearch&t_id=1787544296435&t_st=95&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "cup-plastik-tutup",
+      "nama": "Cup plastik + tutup",
+      "kategori": "Kemasan",
+      "alias": [
+        "gelas plastik",
+        "cup minuman",
+        "cup sealer",
+        "gelas cup"
+      ],
+      "kemasan": "1 pack",
+      "satuan": "pack",
+      "isi": 1,
+      "judul": "Gelas Plastik Oval 12oz 14oz 16oz 18oz 22oz Isi 50pcs / Gelas Oval / U Cup / Gelas Kekinian - GELAS, GELAS OVAL 16OZ",
+      "harga": 25396,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/juraganplastik88-644/gelas-plastik-oval-12oz-14oz-16oz-18oz-22oz-isi-50pcs-gelas-oval-u-cup-gelas-kekinian-1731009027302983245-1734581539729671757?extParam=ivf%3Dfalse%26keyword%3Dgelas+plastik+1+pack%26search_id%3D202608240727557750C9BA8365FE3E2LXM%26src%3Dsearch&t_id=1787544296435&t_st=97&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    },
+    {
+      "id": "kantong-plastik",
+      "nama": "Kantong plastik kresek",
+      "kategori": "Kemasan",
+      "alias": [
+        "kresek",
+        "kantong plastik bening",
+        "plastik kresek",
+        "kantong kresek"
+      ],
+      "kemasan": "1 pack",
+      "satuan": "pack",
+      "isi": 1,
+      "judul": "1 Pack (50pcs) Kantong Plastik Ekonomis Betta Bening Hitam / Delman Merah Tipis HD 15 Isi 50pcs / Kresek Betta Bening Hitam / Delman Merah Embos 15 Isi 50pcs Ekonomis Ramah Lingkungan - BETTA BENING 15 ISI 50 PCS",
+      "harga": 8000,
+      "dicekTanggal": "8/24/2026",
+      "link": "https://www.tokopedia.com/cahaya99plastik/kantong-plastik-bening-tipis-uk-15-isi-50pcs-kresek-bening-embos-betta-ekonomis-15-isi-50-pcs-plastik-hadiah-1736256257430226436?extParam=ivf%3Dfalse%26keyword%3Dkantong+plastik%26search_id%3D202608241314017750C9BA8365FE002S1K%26src%3Dsearch&t_id=1787577248211&t_st=1&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result"
+    }
+  ]
+}

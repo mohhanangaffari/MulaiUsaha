@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="MulaiUsaha">
+  <title>MulaiUsaha</title>
+  <!-- The app's own .brand-mark, scaled from 34px to 120px (factor 3.529):
+       border-radius 11 11 11 4 becomes 39 39 39 14, background stays #d2470f. -->
+  <path d="M39 0 H81 A39 39 0 0 1 120 39 V81 A39 39 0 0 1 81 120 H14 A14 14 0 0 1 0 106 V39 A39 39 0 0 1 39 0 Z" fill="#d2470f"/>
+  <!-- lucide TrendingUp at size 19 / strokeWidth 2.8, scaled by the same factor
+       and centred: 19 * 3.529 = 67, so the inset is (120 - 67) / 2 = 26.5. -->
+  <g transform="translate(26.5 26.5) scale(2.7917)" fill="none" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 7h6v6"/>
+    <path d="m22 7-8.5 8.5-5-5L2 17"/>
+  </g>
+</svg>

@@ -736,6 +736,9 @@ footer .brand { font-size: 15px; color: #55514b; } footer .brand-mark { width: 2
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin { animation: spin .9s linear infinite; }
 
+/* A dedicated document replaces the interactive planning screen in print. */
+.print-report { display: none; }
+
 /* Concept generate bar */
 .concept-generate-bar { display: flex; align-items: center; gap: 8px; max-width: 780px; margin: 0 auto 28px; padding: 0 28px; }
 .concept-idea-input { flex: 1; height: 42px; border: 1.5px solid var(--line); border-radius: 11px; padding: 0 14px; font-size: 13px; color: var(--ink); background: #fff; outline: none; transition: border-color .15s; }
@@ -804,6 +807,95 @@ main.step-enter > * > *.app-reveal { animation: none; }
 }
 
 @media print {
+  @page { size: A4 portrait; margin: 13mm 14mm 15mm; }
+
+  html, body, #root, .app-shell, main { background: #fff !important; min-width: 0; width: auto; min-height: 0; }
+  body { color: #20201d; font-family: 'DM Sans', Arial, sans-serif; font-size: 9.5pt; }
+  * { box-shadow: none !important; animation: none !important; transition: none !important; }
+
   .topbar, .progress-wrap, .back-link, .plan-actions, footer, .action-row { display: none !important; }
-  .app-shell, body { background: white; }.content-page { margin: 0; max-width: none; padding: 10px; }.finance-card { position: relative; top: 0; print-color-adjust: exact; }.launch-panel { print-color-adjust: exact; }.plan-grid { grid-template-columns: 1fr 300px; }.panel, .finance-card, .launch-panel { break-inside: avoid; }
+  .content-page.plan-page { display: block; margin: 0; max-width: none; padding: 0; }
+  .plan-page > :not(.print-report) { display: none !important; }
+  .print-report { display: block !important; color: #20201d; }
+
+  .print-report-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid #242321; padding-bottom: 4mm; margin-bottom: 10mm; }
+  .print-brand { display: flex; align-items: center; gap: 3mm; }
+  .print-brand > span { width: 10mm; height: 10mm; display: grid; place-items: center; background: #d8491d; color: white; border-radius: 2.5mm; font: 800 8pt/1 'Manrope', Arial, sans-serif; print-color-adjust: exact; }
+  .print-brand div { display: flex; flex-direction: column; line-height: 1.1; }
+  .print-brand b { font: 800 12pt/1.1 'Manrope', Arial, sans-serif; }
+  .print-brand small { color: #69645e; font-size: 7pt; margin-top: 1mm; text-transform: uppercase; letter-spacing: .7px; }
+  .print-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 1mm; font-size: 7pt; color: #716c65; text-transform: uppercase; letter-spacing: .5px; }
+  .print-meta b { color: #20201d; font-size: 8pt; letter-spacing: 0; text-transform: none; }
+
+  .print-cover { padding: 4mm 0 8mm; }
+  .print-kicker { margin: 0 0 3mm; color: #b63e13; font-size: 7.5pt; font-weight: 800; letter-spacing: 1.4px; }
+  .print-cover h1 { margin: 0; max-width: 165mm; font: 800 27pt/1.08 'Manrope', Arial, sans-serif; letter-spacing: -.7px; }
+  .print-lead { margin: 4mm 0 9mm; max-width: 130mm; color: #625e58; font-size: 10pt; line-height: 1.55; }
+  .print-identity-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #d9d2c9; border-radius: 3mm; overflow: hidden; }
+  .print-identity-grid > div { min-height: 19mm; padding: 4mm 5mm; display: flex; flex-direction: column; gap: 1.8mm; border-bottom: 1px solid #e6e0d8; }
+  .print-identity-grid > div:nth-child(odd) { border-right: 1px solid #e6e0d8; }
+  .print-identity-grid > div:nth-last-child(-n+2) { border-bottom: 0; }
+  .print-identity-grid span, .print-metric-grid span { color: #756f68; font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .print-identity-grid b { font-size: 10pt; line-height: 1.3; }
+  .print-concept-note { margin-top: 6mm; padding: 5mm 6mm; border-left: 1.5mm solid #d8491d; background: #faf6f1; print-color-adjust: exact; }
+  .print-concept-note > span { color: #a83a13; font-size: 7pt; font-weight: 800; letter-spacing: 1px; }
+  .print-concept-note p { margin: 2mm 0; font-size: 10pt; line-height: 1.5; }
+  .print-concept-note small { color: #68635d; }
+
+  .print-section { padding-top: 5mm; }
+  .print-section-title { display: flex; align-items: center; gap: 4mm; margin-bottom: 6mm; padding-bottom: 3mm; border-bottom: 1px solid #d8d1c8; }
+  .print-section-title > span { width: 9mm; height: 9mm; display: grid; place-items: center; border-radius: 50%; background: #242321; color: #fff; font-weight: 800; font-size: 7.5pt; print-color-adjust: exact; }
+  .print-section-title div { display: flex; flex-direction: column; gap: .5mm; }
+  .print-section-title small { color: #b63e13; font-weight: 800; font-size: 6.7pt; letter-spacing: 1px; }
+  .print-section-title h2 { margin: 0; font: 800 16pt/1.2 'Manrope', Arial, sans-serif; }
+  .print-metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .print-metric-grid > div { min-height: 20mm; padding: 4mm; border: 1px solid #ddd6cd; border-radius: 2.5mm; display: flex; flex-direction: column; gap: 2mm; }
+  .print-metric-grid > div.primary { grid-column: span 2; background: #242321; color: #fff; border-color: #242321; print-color-adjust: exact; }
+  .print-metric-grid > div.primary span, .print-metric-grid > div.primary small { color: #d9d2ca; }
+  .print-metric-grid b { font: 800 13pt/1.1 'Manrope', Arial, sans-serif; }
+  .print-metric-grid .primary b { color: #ff7547; font-size: 20pt; }
+  .print-metric-grid small { color: #746e67; font-size: 7.5pt; }
+  .print-metric-grid b.negative { color: #b42318; }
+  .print-cost-breakdown { margin-top: 6mm; break-inside: avoid; }
+  .print-cost-breakdown h3, .print-info-box h3, .print-checklist h3 { margin: 0 0 3mm; font: 800 10pt/1.2 'Manrope', Arial, sans-serif; }
+  .print-cost-breakdown table { width: 100%; border-collapse: collapse; }
+  .print-cost-breakdown td { padding: 2.5mm 1mm; border-bottom: 1px solid #e4ddd5; }
+  .print-cost-breakdown td:last-child { text-align: right; font-weight: 700; }
+  .print-cost-breakdown tr.total td { padding-top: 3.5mm; border-bottom: 0; color: #20201d; font-size: 10.5pt; font-weight: 800; }
+
+  .print-page-break { break-before: page; page-break-before: always; }
+  .print-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 8pt; }
+  .print-table th { background: #242321; color: #fff; padding: 2.7mm 2mm; text-align: left; text-transform: uppercase; letter-spacing: .45px; font-size: 6.8pt; print-color-adjust: exact; }
+  .print-table th:first-child, .print-table td:first-child { width: 9mm; text-align: center; }
+  .print-table th:nth-child(2) { width: 57mm; }
+  .print-table th:nth-child(3) { width: 30mm; }
+  .print-table th:nth-child(4) { width: 31mm; }
+  .print-table th:last-child, .print-table td:last-child { text-align: right; width: 30mm; }
+  .print-table td { padding: 2.8mm 2mm; border-bottom: 1px solid #e1dbd3; vertical-align: top; line-height: 1.35; }
+  .print-table td small { display: block; margin-top: 1mm; color: #777169; }
+  .print-table tbody tr { break-inside: avoid; }
+  .print-table tfoot td { background: #f3eee8; border: 0; font-weight: 800; padding: 3.5mm 2mm; print-color-adjust: exact; }
+  .print-two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 7mm; align-items: start; }
+  .print-info-box { border: 1px solid #dcd5cc; border-radius: 2.5mm; padding: 5mm; break-inside: avoid; }
+  .print-info-box > p { margin: 0; color: #625e58; line-height: 1.5; }
+  .print-info-box ul, .print-info-box ol { list-style: none; margin: 0; padding: 0; }
+  .print-info-box ul li { display: flex; justify-content: space-between; gap: 4mm; padding: 2.2mm 0; border-bottom: 1px solid #e7e1da; }
+  .print-info-box ul li:last-child { border-bottom: 0; }
+  .print-info-box ul.plain li { display: list-item; list-style: disc; margin-left: 4mm; border: 0; padding: 1.5mm 0; line-height: 1.4; }
+  .print-two-column.execution { margin-top: 0; }
+  .print-info-box ol > li { display: flex; justify-content: space-between; gap: 3mm; padding: 3mm 0; border-bottom: 1px solid #e7e1da; break-inside: avoid; }
+  .print-info-box ol > li:last-child { border-bottom: 0; }
+  .print-info-box ol div { display: flex; flex-direction: column; gap: 1mm; }
+  .print-info-box ol small { color: #6e6962; line-height: 1.35; }
+  .print-info-box ol > li > span { flex: 0 0 auto; color: #9b6210; font-weight: 800; }
+  .print-info-box ol.steps > li { justify-content: flex-start; }
+  .print-info-box ol.steps i { width: 7mm; height: 7mm; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: #f0e9e1; color: #a53a14; font-style: normal; font-weight: 800; print-color-adjust: exact; }
+  .print-disclaimer { margin-top: 7mm; padding: 4.5mm 5mm; border: 1px solid #d9bfae; background: #fff8f3; border-radius: 2mm; break-inside: avoid; print-color-adjust: exact; }
+  .print-disclaimer b { font-size: 9pt; color: #9f3612; }
+  .print-disclaimer p { margin: 1.5mm 0 0; color: #5f5a54; line-height: 1.5; }
+  .print-checklist { margin-top: 7mm; break-inside: avoid; }
+  .print-checklist > div { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5mm 6mm; }
+  .print-checklist span { padding-bottom: 2mm; border-bottom: 1px solid #ded8d0; }
+  .print-report-footer { display: flex !important; min-height: 0; align-items: flex-start; justify-content: space-between; gap: 8mm; margin-top: 12mm; padding: 3mm 0 0; border-top: 1px solid #cfc8c0; color: #716b64; font-size: 6.8pt; }
+  .print-report-footer > span { font-size: inherit; }
 }

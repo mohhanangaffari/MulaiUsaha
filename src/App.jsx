@@ -1441,20 +1441,70 @@ function Plan({ form, conceptId, aiConcepts, marketData, batch, setBatch, hasEqu
   const profit = effectivePrice != null ? effectivePrice - hpp : null
   const margin = effectivePrice ? Math.round((profit / effectivePrice) * 100) : null
   const breakEven = effectivePrice ? Math.ceil((operatingTotal / effectivePrice) + (equipmentTotal / Math.max(profit, 1))) : null
+  const projectedRevenue = effectivePrice != null ? effectivePrice * batch : null
+  const projectedGrossProfit = profit != null ? profit * batch : null
+  const planLocation = [form.village, form.district, form.city].filter(Boolean).join(', ') || 'Belum ditentukan'
+  const reportDate = new Intl.DateTimeFormat('id-ID', {
+    day: '2-digit', month: 'long', year: 'numeric',
+  }).format(new Date(marketData?.generatedAt || Date.now()))
   const [copied, setCopied] = useState(false)
   const userEditedCount = Object.keys(userPrices).length
 
   const copySummary = async () => {
+    const ingredientLines = ingredientRows.map((item, index) =>
+      `${index + 1}. ${item.name} — ${item.whole ? Math.ceil(item.qty) : Number.isInteger(item.qty) ? item.qty : item.qty.toFixed(1).replace('.', ',')} ${item.unit} (${rupiah.format(item.cost)})`,
+    )
+    if (packagingRow) ingredientLines.push(`${ingredientLines.length + 1}. ${packagingRow.matchedName || packagingRow.name} — ${packagingRow.qty} ${packagingRow.unit} (${rupiah.format(packagingRow.cost)})`)
+    const equipmentLines = equipment.length
+      ? equipment.map((item, index) => `${index + 1}. ${item.name}${hasEquipment ? ' — sudah dimiliki' : ` — ${rupiah.format(item.cost)}`}`)
+      : ['Belum ada data peralatan.']
+    const supplierLines = supplierRows.length
+      ? supplierRows.slice(0, 5).map((item, index) => `${index + 1}. ${item.name}${item.address ? ` — ${item.address}` : ''}`)
+      : ['Belum ada rekomendasi pemasok yang terverifikasi.']
+    const launchLines = launchSteps.length
+      ? launchSteps.map(([title, detail], index) => `${index + 1}. ${title}${detail ? ` — ${detail}` : ''}`)
+      : ['Mulai dengan batch kecil, catat penjualan, lalu evaluasi respons pembeli.']
     const lines = [
-      'MULAIUSAHA — RENCANA AWAL',
-      `Usaha: ${concept?.title || form.product}`,
-      `Lokasi: ${[form.village, form.district, form.city].filter(Boolean).join(', ') || '-'}`,
-      `Target produksi: ${batch} ${productUnit}`,
-      `Modal awal: ${rupiah.format(initialCapital)}`,
-      `HPP: ${rupiah.format(hpp)}/${productUnit}`,
-      effectivePrice != null && `Harga jual: ${rupiah.format(effectivePrice)}/${productUnit}`,
-      profit != null && `Estimasi laba: ${rupiah.format(profit)}/${productUnit}`,
-      breakEven != null && `BEP: ${breakEven} ${productUnit}`,
+      'MULAIUSAHA',
+      'RENCANA USAHA AWAL',
+      `Disusun: ${reportDate}`,
+      '',
+      'A. IDENTITAS RENCANA',
+      `Jenis usaha       : ${form.product || '-'}`,
+      `Konsep usaha      : ${concept?.title || form.product || '-'}`,
+      `Lokasi jualan     : ${planLocation}`,
+      `Target konsumen   : ${concept?.target || '-'}`,
+      `Strategi          : ${concept?.description || '-'}`,
+      `Satuan penjualan  : ${productUnit}${concept?.unitContent ? ` (${concept.unitContent})` : ''}`,
+      `Target produksi   : ${batch} ${productUnit} per batch`,
+      '',
+      'B. RINGKASAN KEUANGAN',
+      `Bahan produksi    : ${rupiah.format(ingredientTotal)}`,
+      packaging != null && `Kemasan dan label  : ${rupiah.format(packaging)}`,
+      productionOverhead != null && `Biaya operasional  : ${rupiah.format(productionOverhead)}`,
+      `Peralatan awal    : ${hasEquipment ? 'Sudah dimiliki (tidak dihitung dalam modal)' : rupiah.format(equipmentTotal)}`,
+      `Total modal awal  : ${rupiah.format(initialCapital)}`,
+      `HPP               : ${rupiah.format(hpp)} per ${productUnit}`,
+      effectivePrice != null && `Harga jual asumsi  : ${rupiah.format(effectivePrice)} per ${productUnit}`,
+      projectedRevenue != null && `Proyeksi omzet     : ${rupiah.format(projectedRevenue)} per batch`,
+      projectedGrossProfit != null && `Proyeksi laba kotor: ${rupiah.format(projectedGrossProfit)} per batch`,
+      margin != null && `Margin kotor       : ${margin}%`,
+      breakEven != null && profit > 0 && `Titik balik modal  : sekitar ${breakEven} ${productUnit} terjual`,
+      '',
+      'C. KEBUTUHAN PRODUKSI',
+      ...ingredientLines,
+      '',
+      'D. PERALATAN',
+      ...equipmentLines,
+      '',
+      'E. REFERENSI PEMASOK LOKAL',
+      ...supplierLines,
+      '',
+      'F. RENCANA PELAKSANAAN AWAL',
+      ...launchLines,
+      '',
+      'CATATAN',
+      'Perhitungan ini merupakan estimasi awal. Verifikasi kembali harga bahan, kapasitas produksi, harga jual, dan permintaan pasar sebelum mengeluarkan modal.',
     ].filter(Boolean)
     await navigator.clipboard.writeText(lines.join('\n'))
     setCopied(true)
@@ -1481,6 +1531,84 @@ function Plan({ form, conceptId, aiConcepts, marketData, batch, setBatch, hasEqu
         <div><div className="eyebrow"><ClipboardCheck size={15} /> Rencana usaha awal</div><h1>{concept.title} <span>siap diuji</span></h1><p>Angka akan menyesuaikan target produksi dan alat yang sudah kamu miliki.</p></div>
         <div className="plan-actions"><button className="secondary-button compact" onClick={copySummary}>{copied ? <><Check size={16} /> Tersalin</> : <><FileText size={16} /> Salin ringkasan</>}</button><button className="primary-button compact" onClick={() => window.print()}><ExternalLink size={16} /> Cetak</button></div>
       </div>
+
+      <article className="print-report" aria-hidden="true">
+        <header className="print-report-header">
+          <div className="print-brand"><span>MU</span><div><b>MulaiUsaha</b><small>Rencana Usaha Awal</small></div></div>
+          <div className="print-meta"><span>Dokumen perencanaan</span><b>{reportDate}</b></div>
+        </header>
+
+        <section className="print-cover">
+          <p className="print-kicker">RENCANA USAHA AWAL</p>
+          <h1>{concept.title}</h1>
+          <p className="print-lead">Rencana awal untuk menguji usaha secara terukur sebelum menambah skala dan modal.</p>
+          <div className="print-identity-grid">
+            <div><span>Jenis usaha</span><b>{form.product || '-'}</b></div>
+            <div><span>Lokasi jualan</span><b>{planLocation}</b></div>
+            <div><span>Target konsumen</span><b>{concept.target || '-'}</b></div>
+            <div><span>Skala produksi</span><b>{batch} {productUnit} per batch</b></div>
+          </div>
+          <div className="print-concept-note">
+            <span>ARAH KONSEP</span>
+            <p>{concept.description || 'Konsep ini dipilih sebagai dasar pengujian awal di pasar lokal.'}</p>
+            {concept.unitContent && <small>Satuan jual: 1 {productUnit} · {concept.unitContent}</small>}
+          </div>
+        </section>
+
+        <section className="print-section">
+          <div className="print-section-title"><span>01</span><div><small>RINGKASAN EKSEKUTIF</small><h2>Angka utama rencana</h2></div></div>
+          <div className="print-metric-grid">
+            <div className="primary"><span>Total modal awal</span><b>{rupiah.format(initialCapital)}</b><small>Untuk {batch} {productUnit}</small></div>
+            <div><span>HPP / {productUnit}</span><b>{rupiah.format(hpp)}</b></div>
+            <div><span>Harga jual asumsi</span><b>{effectivePrice != null ? rupiah.format(effectivePrice) : 'Belum ditentukan'}</b></div>
+            <div><span>Omzet / batch</span><b>{projectedRevenue != null ? rupiah.format(projectedRevenue) : '-'}</b></div>
+            <div><span>Laba kotor / batch</span><b className={projectedGrossProfit != null && projectedGrossProfit < 0 ? 'negative' : ''}>{projectedGrossProfit != null ? rupiah.format(projectedGrossProfit) : '-'}</b></div>
+            <div><span>Margin kotor</span><b>{margin != null ? `${margin}%` : '-'}</b></div>
+            <div><span>Perkiraan BEP</span><b>{breakEven != null && profit > 0 ? `${breakEven} ${productUnit}` : 'Belum tercapai'}</b></div>
+          </div>
+          <div className="print-cost-breakdown">
+            <h3>Komposisi modal</h3>
+            <table><tbody>
+              <tr><td>Bahan produksi</td><td>{rupiah.format(ingredientTotal)}</td></tr>
+              {packaging != null && <tr><td>Kemasan dan label</td><td>{rupiah.format(packaging)}</td></tr>}
+              {productionOverhead != null && <tr><td>Gas, listrik, dan cadangan</td><td>{rupiah.format(productionOverhead)}</td></tr>}
+              <tr><td>Peralatan awal</td><td>{hasEquipment ? 'Sudah dimiliki' : rupiah.format(equipmentTotal)}</td></tr>
+              <tr className="total"><td>Total modal awal</td><td>{rupiah.format(initialCapital)}</td></tr>
+            </tbody></table>
+          </div>
+        </section>
+
+        <section className="print-section print-page-break">
+          <div className="print-section-title"><span>02</span><div><small>RENCANA PRODUKSI</small><h2>Kebutuhan bahan dan biaya</h2></div></div>
+          <table className="print-table">
+            <thead><tr><th>No.</th><th>Bahan</th><th>Jumlah</th><th>Sumber harga</th><th>Biaya</th></tr></thead>
+            <tbody>
+              {ingredientRows.map((item, index) => (
+                <tr key={item.id || item.name}><td>{index + 1}</td><td><b>{item.name}</b></td><td><Quantity value={item.qty} whole={item.whole} /> {item.unit}</td><td>{item.hasUserPrice ? 'Harga pengguna' : item.priceSource === 'local-db' ? 'Data pasar' : 'Estimasi'}</td><td>{rupiah.format(item.cost)}</td></tr>
+              ))}
+              {packagingRow && <tr><td>{ingredientRows.length + 1}</td><td><b>{packagingRow.matchedName || packagingRow.name}</b><small>Kemasan dan label</small></td><td>{packagingRow.qty} {packagingRow.unit}</td><td>{packagingRow.priceSource === 'local-db' ? 'Data pasar' : 'Estimasi'}</td><td>{rupiah.format(packagingRow.cost)}</td></tr>}
+              {productionOverhead != null && <tr><td>{ingredientRows.length + (packagingRow ? 2 : 1)}</td><td><b>Gas, listrik, dan cadangan</b></td><td>1 batch</td><td>Estimasi</td><td>{rupiah.format(productionOverhead)}</td></tr>}
+            </tbody>
+            <tfoot><tr><td colSpan="4">Total biaya operasional per batch</td><td>{rupiah.format(operatingTotal)}</td></tr></tfoot>
+          </table>
+          <div className="print-two-column">
+            <div className="print-info-box"><h3>Peralatan</h3>{equipment.length ? <ul>{equipment.map((item) => <li key={item.name}><span>{item.name}</span><b>{hasEquipment ? 'Sudah dimiliki' : rupiah.format(item.cost)}</b></li>)}</ul> : <p>Belum ada data peralatan.</p>}</div>
+            <div className="print-info-box"><h3>Asumsi perhitungan</h3><ul className="plain"><li>Target produksi: {batch} {productUnit}</li><li>Satuan jual: {productUnit}{concept.unitContent ? ` (${concept.unitContent})` : ''}</li><li>{userEditedCount} harga diisi langsung oleh pengguna</li><li>Harga jual dapat disesuaikan saat validasi pasar</li></ul></div>
+          </div>
+        </section>
+
+        <section className="print-section print-page-break">
+          <div className="print-section-title"><span>03</span><div><small>PELAKSANAAN</small><h2>Pemasok dan langkah awal</h2></div></div>
+          <div className="print-two-column execution">
+            <div className="print-info-box"><h3>Referensi pemasok lokal</h3>{supplierRows.length ? <ol>{supplierRows.slice(0, 6).map((item) => <li key={item.googlePlaceId || item.name}><div><b>{item.name}</b><small>{item.address || 'Alamat belum tersedia'}</small></div>{item.rating && <span>★ {item.rating}</span>}</li>)}</ol> : <p>Belum ada pemasok lokal yang terverifikasi. Lakukan pencarian ulang sebelum berbelanja.</p>}</div>
+            <div className="print-info-box"><h3>Rencana pelaksanaan awal</h3>{launchSteps.length ? <ol className="steps">{launchSteps.map(([title, detail], index) => <li key={title}><i>{index + 1}</i><div><b>{title}</b><small>{detail}</small></div></li>)}</ol> : <p>Mulai dengan batch kecil, catat penjualan, lalu evaluasi respons pembeli.</p>}</div>
+          </div>
+          <div className="print-disclaimer"><b>Catatan penting</b><p>Dokumen ini merupakan estimasi awal, bukan jaminan keuntungan. Harga bahan, ketersediaan pemasok, kemampuan produksi, harga jual, dan permintaan pasar perlu diverifikasi sebelum modal dikeluarkan.</p></div>
+          <div className="print-checklist"><h3>Checklist sebelum mulai</h3><div><span>□ Verifikasi harga bahan</span><span>□ Uji sampel produk</span><span>□ Konfirmasi pemasok</span><span>□ Tentukan kanal penjualan</span><span>□ Catat hasil batch pertama</span><span>□ Evaluasi harga jual</span></div></div>
+        </section>
+
+        <footer className="print-report-footer"><span>MulaiUsaha — Dari ide menjadi rencana yang dapat diuji</span><span>Dokumen dibuat pada {reportDate}</span></footer>
+      </article>
 
       <div className="batch-selector panel">
         <div><small>SKALA PRODUKSI PERTAMA</small><h3>Mulai dari berapa {productUnit}?</h3><p>Untuk pasar baru, kami sarankan mulai kecil dan kumpulkan masukan.</p></div>

@@ -23,6 +23,7 @@ import {
   updateProject,
 } from './projectStore.js'
 import { limiter } from './rateLimit.js'
+import { credentialShape } from './supabase.js'
 
 // Vercel runs this as a Function, where there is no --dev flag and no long-lived
 // process. Local development passes --dev; anything else is treated as deployed.
@@ -173,6 +174,7 @@ app.get('/api/health', (_request, response) => {
     googlePlacesConfigured: Boolean(process.env.GOOGLE_MAPS_API_KEY),
     reviewProvider: process.env.SERPAPI_API_KEY ? 'serpapi' : 'google_places_only',
     serpApiConfigured: Boolean(process.env.SERPAPI_API_KEY),
+    supabase: credentialShape(),
     time: new Date().toISOString(),
   })
 })

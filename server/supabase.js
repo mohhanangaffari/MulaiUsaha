@@ -16,6 +16,26 @@ const anonKey = () => process.env.SUPABASE_ANON_KEY || ''
 const serviceKey = () => process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 
 export const authConfigured = () => Boolean(supabaseUrl() && anonKey() && process.env.SESSION_SECRET)
+
+/**
+ * Shape-only report on the credentials, for /api/health. Deliberately booleans and
+ * nothing else: enough to spot a value that was truncated or picked up a stray
+ * character when it was pasted into a dashboard, without revealing any of it.
+ */
+export function credentialShape() {
+  const url = process.env.SUPABASE_URL || ''
+  const check = (value) => ({
+    ada: Boolean(value),
+    adaSpasiAtauBarisBaru: /\s/.test(value || ''),
+    bentukJwt: /^ey[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test((value || '').trim()),
+  })
+  return {
+    url: { ada: Boolean(url), diawaliHttps: url.startsWith('https://'), adaSpasiAtauBarisBaru: /\s/.test(url) },
+    anonKey: check(process.env.SUPABASE_ANON_KEY),
+    serviceKey: check(process.env.SUPABASE_SERVICE_ROLE_KEY),
+    sessionSecret: { ada: Boolean(process.env.SESSION_SECRET), cukupPanjang: (process.env.SESSION_SECRET || '').length >= 32 },
+  }
+}
 export const projectStoreConfigured = () => Boolean(supabaseUrl() && serviceKey())
 
 /** Supabase reports failures in several shapes; this finds the readable one. */
@@ -34,7 +54,11 @@ export async function authRequest(path, body) {
       headers: { apikey: anonKey(), Authorization: `Bearer ${anonKey()}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     })
-  } catch {
+  } catch (error) {
+    // Swallowing the real reason here cost an hour once already. An invalid URL and
+    // a bad header value both throw instantly and look identical from outside, so
+    // the underlying message goes to the log where it can actually be read.
+    console.error('[supabase-auth]', error.name + ': ' + error.message, error.cause ? '| cause: ' + error.cause.message : '')
     throw Object.assign(new Error('Tidak bisa menghubungi Supabase. Coba lagi sebentar.'), { status: 503 })
   }
   const payload = await response.json().catch(() => null)

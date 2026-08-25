@@ -231,14 +231,20 @@ CEK KEWAJARAN BIAYA — WAJIB, hitung sebelum menjawab:
 PENTING (baca ulang sebelum menjawab): field "packaging" WAJIB berupa OBJECT {name, baseQty, unit, estimatedCost} seperti contoh skema di atas — BUKAN angka tunggal. JANGAN gunakan key "packagingCost".` : ''}`
 }
 
-async function callGemini(systemPrompt, userPrompt) {
-  const apiKey = process.env.GEMINI_API_KEY
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key=${apiKey}`
+// From Vercel, requests to generativelanguage.googleapis.com hang intermittently:
+// the same endpoint answers in ~3s one minute and never answers the next. Measured
+// on 2026-08-25 — the identical call from a laptop takes 0.9-2.7s, so it is the
+// network path and not the prompt. One long timeout turns that into a dead feature,
+// so each attempt gives up early and another is made instead: three short tries beat
+// one long wait when the failure is a hang rather than a slow answer.
+const GEMINI_ATTEMPT_TIMEOUT_MS = 12000
+const GEMINI_ATTEMPTS = 3
+
+async function fetchGeminiOnce(url, systemPrompt, userPrompt) {
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 30000)
-  let response
+  const timeout = setTimeout(() => controller.abort(), GEMINI_ATTEMPT_TIMEOUT_MS)
   try {
-    response = await fetch(url, {
+    return await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -250,6 +256,30 @@ async function callGemini(systemPrompt, userPrompt) {
     })
   } finally {
     clearTimeout(timeout)
+  }
+}
+
+async function callGemini(systemPrompt, userPrompt) {
+  const apiKey = process.env.GEMINI_API_KEY
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key=${apiKey}`
+  let response
+  let lastError
+  for (let attempt = 1; attempt <= GEMINI_ATTEMPTS; attempt += 1) {
+    try {
+      response = await fetchGeminiOnce(url, systemPrompt, userPrompt)
+      break
+    } catch (error) {
+      lastError = error
+      // A refusal from Google is final. Only a hang or a dropped connection is
+      // worth trying again — retrying a 400 would just waste the remaining budget.
+      const worthRetrying = error.name === 'AbortError' || /fetch failed|network|ECONN|socket|terminated/i.test(error.message)
+      if (!worthRetrying) throw error
+      console.warn(`[gemini] percobaan ${attempt}/${GEMINI_ATTEMPTS} gagal: ${error.message}`)
+      if (attempt < GEMINI_ATTEMPTS) await new Promise((resolve) => setTimeout(resolve, 400 * attempt))
+    }
+  }
+  if (!response) {
+    throw new Error(`Gemini tidak menjawab setelah ${GEMINI_ATTEMPTS} percobaan: ${lastError?.message || 'tidak diketahui'}`)
   }
   if (!response.ok) {
     const body = await response.text().catch(() => '')
